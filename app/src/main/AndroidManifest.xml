@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Wasted"
         android:dataExtractionRules="@xml/data_extraction_rules"
-        tools:targetApi="s">
+        android:usesCleartextTraffic="false"
+	tools:targetApi="s">
 
         <activity
             android:name=".MainActivity"
@@ -95,16 +96,14 @@
             </intent-filter>
         </activity>
 
-        <receiver
-            android:name=".TriggerReceiver"
-            android:directBootAware="true"
-            android:enabled="false"
-            android:exported="true"
-            tools:ignore="ExportedReceiver">
-            <intent-filter>
-                <action android:name="me.lucky.wasted.action.TRIGGER" />
-            </intent-filter>
+	<receiver android:name=".TriggerReceiver"
+ 	    android:exported="false"
+            android:directBootAware="true">
+ 	<intent-filter>
+           <action android:name="me.lucky.wasted.action.TRIGGER" />
+        </intent-filter>
         </receiver>
+
 
         <service
             android:name=".trigger.notification.NotificationListenerService"
@@ -188,22 +187,6 @@
             android:label="@string/telegram"
             android:icon="@mipmap/ic_telegram"
             android:roundIcon="@mipmap/ic_telegram_round"
-            android:noHistory="true"
-            android:theme="@android:style/Theme.NoDisplay"
-            android:enabled="false"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity-alias>
-
-        <activity-alias
-            android:name=".trigger.application.ThreemaActivity"
-            android:targetActivity=".trigger.application.ApplicationActivity"
-            android:label="@string/threema"
-            android:icon="@mipmap/ic_threema"
-            android:roundIcon="@mipmap/ic_threema_round"
             android:noHistory="true"
             android:theme="@android:style/Theme.NoDisplay"
             android:enabled="false"
